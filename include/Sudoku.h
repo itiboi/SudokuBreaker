@@ -15,14 +15,13 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <structs.h>
+#include <Field.h>
 #include <string>
 #include <vector>
 
 using namespace std;
 
 typedef char byte;
-typedef pair<byte,byte> point; // first - x; second - y
 
 /** Speichert ein Sudoku-Feld und enthält eine Löse-Funktion. Das Sudoku
  *  kann geladen und gespeichert werden. Die Klasse enthält
