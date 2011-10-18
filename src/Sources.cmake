@@ -7,6 +7,6 @@
 #-------------------------------------
 
 # Add Srcs Files
-SET( SRCs ${SRCs} ${SRC_DIR}/CFeld.cpp )
-SET( SRCs ${SRCs} ${SRC_DIR}/CSudoku.cpp )
+SET( SRCs ${SRCs} ${SRC_DIR}/Field.cpp )
+SET( SRCs ${SRCs} ${SRC_DIR}/Sudoku.cpp )
 SET( SRCs ${SRCs} ${SRC_DIR}/main.cpp )

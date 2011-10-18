@@ -15,26 +15,27 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#include <global.h>
+#include <Sudoku.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <stdlib.h>
-#include "global.h"
-#include "CSudoku.h"
 
 using namespace std;
 
 // Konstruktor
-CSudoku::CSudoku( bool quiet ) : Silent(quiet) {
+Sudoku::Sudoku( bool quiet ) : Silent(quiet) {
 }
 
-void CSudoku::PrintInfo( string text ) {
+void Sudoku::PrintInfo( string text ) {
 	if( !Silent )
 		cout << text.c_str();
 };
 
 // Löscht die Möglichkeiten des übergebenen Feldes
-void CSudoku::Kill( byte punkt, byte zahl ) {
+void Sudoku::Kill( byte punkt, byte zahl ) {
 	byte quad = (punkt/27)*3 +   /* "Reihe" des Quadrats */ \
 				(punkt%27%9)/3 /* Abstand zum Rand */;
 	byte point = (quad/3)*27 + /* Erstes Feld der Reihe des Quadrats */ \
@@ -51,7 +52,7 @@ void CSudoku::Kill( byte punkt, byte zahl ) {
 }
 
 // Legt die Möglichkeiten der Sudokufelder fest
-void CSudoku::Update(void) {
+void Sudoku::Update(void) {
 	PrintInfo( "INFO: Aktualisiere die Kandidaten\n" );
 	for( byte i = 0; i < 81; i++ )
 		if( Felder[i].Value != 0 )
@@ -59,7 +60,7 @@ void CSudoku::Update(void) {
 }
 
 // Kontrolliert alle Felder ob Sudoku noch lösbar
-bool CSudoku::ControlEmpty(void) {
+bool Sudoku::ControlEmpty(void) {
 	for( byte i = 0; i < 81; i++ ) {
 		if( Felder[i].Value )
 			continue;
@@ -77,7 +78,7 @@ bool CSudoku::ControlEmpty(void) {
 	return true;
 }
 // Kontrolliert ein Feld auf eine überbliebende Möglichkeit
-byte CSudoku::ControlField( byte punkt ) {
+byte Sudoku::ControlField( byte punkt ) {
 	int zahl = 0;
 	for( byte possibility = 0; possibility < 9; possibility++ )
 		if( Felder[punkt].Possibilities[possibility] ) {
@@ -88,7 +89,7 @@ byte CSudoku::ControlField( byte punkt ) {
 	return zahl;
 }
 // Kontrolliert die Möglichkeiten der Zahl in der übergebenen Reihe
-byte CSudoku::ControlRow( byte row, byte zahl ) {
+byte Sudoku::ControlRow( byte row, byte zahl ) {
 	byte found = -1;
 	for( byte column = 0; column < 9; column++ )
 		if( Felder[row*9 + column].Possibilities[zahl - 1] ) {
@@ -101,7 +102,7 @@ byte CSudoku::ControlRow( byte row, byte zahl ) {
 	return found;
 }
 // Kontrolliert die Möglichkeiten der Zahl in der übergebenen Spalte
-byte CSudoku::ControlColumn( byte column, byte zahl ) {
+byte Sudoku::ControlColumn( byte column, byte zahl ) {
 	byte found = -1;
 	for( byte row = 0; row < 9; row++ )
 		if( Felder[column*9 + row].Possibilities[zahl - 1] ) {
@@ -114,7 +115,7 @@ byte CSudoku::ControlColumn( byte column, byte zahl ) {
 	return found;
 }
 // Kontrolliert die Möglichkeiten der Zahl im übergebenen Quadrat
-byte CSudoku::ControlSquare( byte quad, byte zahl ) {
+byte Sudoku::ControlSquare( byte quad, byte zahl ) {
 	byte found = -1;
 	byte point = (quad/3)*27 + (quad%3)*3;
 	for( byte i = 0; i < 9; i++, point++ ) {
@@ -131,7 +132,7 @@ byte CSudoku::ControlSquare( byte quad, byte zahl ) {
 	// Wert zurückgeben
 	return found;
 }
-bool CSudoku::TwoStepMethod( byte quad, byte zahl, bool horizontal ) {
+bool Sudoku::TwoStepMethod( byte quad, byte zahl, bool horizontal ) {
 	byte point = (quad/3)*27 + (quad%3)*3;
 	byte found = -1;
 	byte addvalueFor = horizontal ? 1 : 9;
@@ -164,7 +165,7 @@ bool CSudoku::TwoStepMethod( byte quad, byte zahl, bool horizontal ) {
 	}
 	return change;
 }
-bool CSudoku::DoTwoStep( void ) {
+bool Sudoku::DoTwoStep( void ) {
 	bool change = false;
 	for( byte i = 0; i < 9; i++ )
 		for( byte zahl = 1; zahl <= 9; zahl++ ) {
@@ -177,7 +178,7 @@ bool CSudoku::DoTwoStep( void ) {
 }
 
 // überprüft ob Sudoku fertig gelöst wurde
-bool CSudoku::IsFinished( int* zahl ) {
+bool Sudoku::IsFinished( int* zahl ) {
 	// Alle festgelegte Felder zählen
 	int counter = 0;
 	for(int i = 0; i < 81; i++)
@@ -189,7 +190,7 @@ bool CSudoku::IsFinished( int* zahl ) {
 }
 
 // Gibt den aktuellen Status aus
-void CSudoku::PrintStatus(void) {
+void Sudoku::PrintStatus(void) {
 	if( Silent )
 		return;
 	cout << "\nINFO: Der Status des Sudokus:\n";
@@ -227,7 +228,7 @@ void CSudoku::PrintStatus(void) {
 }
 
 // Löst das Sudoku nach Standard-Methode
-bool CSudoku::NormalSolve(void) {
+bool Sudoku::NormalSolve(void) {
 	bool found;
 	byte punkt = -1;
 	do {
@@ -286,7 +287,7 @@ bool CSudoku::NormalSolve(void) {
 	return IsFinished();
 }
 // Löst das Sudoku nach Backtracking-Methode
-bool CSudoku::BacktrackingSolve(void) {
+bool Sudoku::BacktrackingSolve(void) {
 	byte punkt;
 	// Jedes Feld überprüfen
 	for( punkt = 0; punkt < 81; punkt++ )
@@ -337,14 +338,14 @@ bool CSudoku::BacktrackingSolve(void) {
 }
 
 // Backup-Funktion
-void CSudoku::Backup( void ) {
+void Sudoku::Backup( void ) {
 	BackupFelder.resize( BackupFelder.size()+1 );
-	BackupFelder.back() = new CFeld[81];
+	BackupFelder.back() = new Field[81];
 	for( int i = 0; i < 81; i++ )
 		BackupFelder.back()[i] = Felder[i];
 }
 // Restore-Funktion
-void CSudoku::Restore( void ) {
+void Sudoku::Restore( void ) {
 	for( int i = 0; i < 81; i++ )
 		Felder[i] = BackupFelder.back()[i];
 	delete[] BackupFelder.back();
@@ -352,7 +353,7 @@ void CSudoku::Restore( void ) {
 }
 
 // Läd ein Sudoku
-bool CSudoku::Laden( string sudoku ) {
+bool Sudoku::Laden( string sudoku ) {
 	// Überprüfen, ob String gültig
 	if( sudoku.length() != 81 )
 		return false;
@@ -370,7 +371,7 @@ bool CSudoku::Laden( string sudoku ) {
 }
 
 // Löst ein geladenes Sudoku
-bool CSudoku::Break(void) {
+bool Sudoku::Break(void) {
 	// Möglichkeiten aktualisieren
 	Update();
 	// Prüfen ob Sudoku normal gelöst wurde
@@ -389,7 +390,7 @@ bool CSudoku::Break(void) {
 	return IsFinished();
 }
 // Schreibt das bearbeitete Sudoku in eine Datei
-bool CSudoku::Schreiben(char* path)
+bool Sudoku::Schreiben(char* path)
 {
 	// Datei öffnen
 	fstream file(path, ios::out);
@@ -411,7 +412,7 @@ bool CSudoku::Schreiben(char* path)
 }
 
 // Gibt Sudoku zurück
-string CSudoku::GetSudoku(void) {
+string Sudoku::GetSudoku(void) {
 	string sudoku = "";
 
 	char header[] = "+---+---+---+\n";

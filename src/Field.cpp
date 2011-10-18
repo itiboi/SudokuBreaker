@@ -15,38 +15,38 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "CFeld.h"
+#include <Field.h>
 
 // Konstruktor
-CFeld::CFeld( void ) : Value(0) {
+Field::Field( void ) : Value(0) {
 	SetBack();
 }
 
-CFeld::CFeld( const CFeld& feld ) {
+Field::Field( const Field& feld ) {
 	(*this) = feld;
 }
 
 // Funktion um Möglichkeiten wieder zurück zu setzen
-void CFeld::SetBack(void) {
+void Field::SetBack(void) {
 	// Alle Möglichkeiten auf true setzen
 	for(int i = 0; i < 9; i++)
 		Possibilities[i] = true;
 }
 
 // Gibt den Wert als Char zurück
-char CFeld::GetValue(void) {
+char Field::GetValue(void) {
 	if(Value >= 1 && Value <= 9)
 		return static_cast<char>(Value + 48);
 	return ' ';
 }
 
-CFeld& CFeld::operator=(const CFeld& feld) {
+Field& Field::operator=(const Field& feld) {
 	Value = feld.Value;
 	for( int i = 0; i < 9; i++ )
 		Possibilities[i] = feld.Possibilities[i];
 	return *this;
 }
-CFeld& CFeld::operator=(const int& value) {
+Field& Field::operator=(const int& value) {
 	Value = value;
 	Possibilities[value] = true;
 	for( int i = 0; i < 9; i++ ) {

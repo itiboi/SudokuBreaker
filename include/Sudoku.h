@@ -15,7 +15,7 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "structs.h"
+#include <structs.h>
 #include <string>
 #include <vector>
 
@@ -31,16 +31,16 @@ typedef pair<byte,byte> point; // first - x; second - y
  *  sondern löscht auch Kandidaten mit Hilfe der "TwoStep"-Methode
  *  (Beschreibung: http://sudokugarden.de/de/loesen/mehrstufig).
  */
-class CSudoku {
+class Sudoku {
 private:
 	/** Felder des Sudokus. Die Felder werden reihenweise durchnummeriert.
 	 */
-	CFeld Felder[81];
+	Field Felder[81];
 	/** Backup des Sudokus, das bei der Backtrackingmethode verwendet wird.
 	 *  Die Backupmethode reserviert Speicher für die Kopien, die
 	 *  Restoremethode gibt ihn wieder frei.
 	 */
-	vector<CFeld*> BackupFelder;
+	vector<Field*> BackupFelder;
 
 	/** Löscht die Möglichkeiten des übergebenen Feldes. Alle Möglichkeiten
 	 *  der Zahl werden in Reihe, Spalte und Quadrat gelöscht.
@@ -87,7 +87,7 @@ private:
 	void PrintInfo( string text );
 public:
 	// Konstruktor
-	CSudoku( bool quiet = false );
+	Sudoku( bool quiet = false );
 
 	// Sollen Infos ausgegeben werden
 	bool Silent;

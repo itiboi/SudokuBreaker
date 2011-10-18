@@ -15,14 +15,15 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#include <global.h>
+#include <Sudoku.h>
+
 #include <iostream>
 #include <time.h>
 #include <string>
 #include <cstring>
 #include <cstdio>
 #include <stdlib.h>
-#include "global.h"
-#include "CSudoku.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ int main(int argc, char* args[])
 	// Zufallsfunktion initialisieren
 	srand((unsigned)time(NULL));
 	// Sudoku erstellen und Eingeschaften festlegen
-	CSudoku Sudoku( false );
+	Sudoku Sudoku( false );
 	// Info ausgeben
 	printf(ABOUT, TITLE, VERSION, YEAR, AUTHOR);
 	cout << '\n' << '\n';

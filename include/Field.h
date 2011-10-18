@@ -20,7 +20,7 @@
  *  eine Variable zum Speichern eines gesetzten
  *  Wertes.
  */
-class CFeld {
+class Field {
 public:
 	/// Wert des Feldes; wenn kein Wert, dann 0
 	int Value;
@@ -28,8 +28,8 @@ public:
 	bool Possibilities[9];
 
 	// Konstruktor
-	CFeld( void );
-	CFeld( const CFeld& feld );
+	Field( void );
+	Field( const Field& feld );
 	/// Funktion um Möglichkeiten wieder zurück zu setzen
 	void SetBack( void );
 	/** Gibt den Wert als Char zurück. Wenn kein Wert gesetzt,
@@ -37,6 +37,6 @@ public:
 	 */
 	char GetValue( void );
 	
-	CFeld& operator=(const CFeld& feld);
-	CFeld& operator=(const int& value);
+	Field& operator=(const Field& feld);
+	Field& operator=(const int& value);
 };

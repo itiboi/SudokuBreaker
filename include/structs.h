@@ -15,7 +15,7 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "CFeld.h"
+#include <Field.h>
 
 //Fasst X und Y-Koordinate zusammen
 struct Point {
