@@ -15,6 +15,9 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
 #define TITLE "SudokuBreaker"
 #define VERSION "1.37"
 #define YEAR "2008-2011"
@@ -26,3 +29,5 @@
 #define MSG_INSERT_COLUMN "INFO: Setze Kandidat %d in Spalte %d, Reihe %d wegen einzigster Moeglichkeit in der Spalte\n"
 #define MSG_INSERT_SQUARE "INFO: Setze Kandidat %d in Spalte %d, Reihe %d wegen einzigster Moeglichkeit im Quadrat %d\n"
 #define MSG_INSERT_FIELD  "INFO: Setze Kandidat %d in Spalte %d, Reihe %d wegen einzigster Moeglichkeit im Feld\n"
+
+#endif // GLOBAL_H

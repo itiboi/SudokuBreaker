@@ -15,6 +15,9 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#ifndef SUDOKU_H
+#define SUDOKU_H
+
 #include <Field.h>
 #include <string>
 #include <vector>
@@ -100,3 +103,5 @@ public:
 	// Gibt Sudoku zurück
 	string GetSudoku( void );
 };
+
+#endif // SUDOKU_H

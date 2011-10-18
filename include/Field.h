@@ -15,6 +15,9 @@
 // with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#ifndef FIELD_H
+#define FIELD_H
+
 /// Verwaltet ein Feld eines Sudokus
 /** Das heißt sie enthält alle Möglichkeiten und
  *  eine Variable zum Speichern eines gesetzten
@@ -40,3 +43,5 @@ public:
 	Field& operator=(const Field& feld);
 	Field& operator=(const int& value);
 };
+
+#endif // FIELD_H
