@@ -1,0 +1,3 @@
+# Ignore hidden files in root folder (e.g. created by eclipse); but do not ignore .gitignore
+.*
+!.gitignore
