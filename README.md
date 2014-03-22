@@ -12,15 +12,16 @@ Just pass the sudoku written from top to bottom from left to right with
 
 Compile
 -------
-Just go into build directory with
-> cd build
-Then use CMake to create Makefile
-> cmake ..
-and start build process
-> make
+
+Just go into build directory, use CMake to create Makefile and start build process:
+
+    cd build
+    cmake ..
+    make
 
 License
 -------
+
 (c) 2008-2011 by Tim Bolender
 
 This program is free software; you can redistribute it and/or modify
